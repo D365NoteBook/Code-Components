@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control 
+    namespace="DNB" 
+    constructor="TimeWindowPicker" 
+    version="0.0.10" 
+    display-name-key="Time Window Picker" 
+    description-key="Time Window Picker" 
+    control-type="virtual" >
+    <external-service-usage enabled="false">
+    </external-service-usage>
+    <property 
+      name="timeFrom" 
+      display-name-key="Time From" 
+      description-key="Time From" 
+      of-type="DateAndTime.DateAndTime" 
+      usage="bound" 
+      required="true" />
+    <property 
+      name="timeTo" 
+      display-name-key="Time To" 
+      description-key="Time To" 
+      of-type="DateAndTime.DateAndTime" 
+      usage="bound" 
+      required="true" />
+    <property 
+      name="increment" 
+      display-name-key="Increament" 
+      description-key="increament" 
+      of-type="Whole.None" 
+      usage="input" 
+      required="false" 
+      default-value="30"/>
+    <property 
+      name="hourFormat" 
+      display-name-key="Hour Format" 
+      description-key="Hour Format" 
+      of-type="Enum" 
+      usage="input" 
+      required="false"
+      default-value="0">
+        <value 
+          name="24-hour" 
+          display-name-key="24-hour"
+        >0</value>
+        <value 
+          name="12-hour" 
+          display-name-key="12-hour"
+        >1</value>
+    </property>
+    <resources>
+      <code path="index.ts" order="1"/>
+      <css path="css\ControlStyle.css" order="1"/>
+      <platform-library name="React" version="16.8.6" />
+      <platform-library name="Fluent" version="8.29.0" />
+    </resources>
+  </control>
+</manifest>
