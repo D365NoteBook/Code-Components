@@ -28,4 +28,11 @@ _Time Selection_
 In addition to date selection, the control also facilitates the selection of the **start time** and **end time**. This is achieved through two Dropdown components, each populated with 
 time slots (slots are configurable, default is 30 min) in a 24-hour format (configurable, it can be 12-hour format also).
 
+**How to use the control**
+
+Import the solution zip file into target dynamics environment and configure the control on the form using a date time field.
+Provide following properties values for the control:
+
+![image](https://github.com/D365NoteBook/Code-Components/assets/166216845/4e301cb3-0cf7-4a6b-8550-1e5680862b2c)
+
 
