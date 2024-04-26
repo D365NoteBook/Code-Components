@@ -16,7 +16,7 @@ export interface IDateAndTimeRangePicker {
     timeTo: Date,
     increment: number,
     hourFormat: number,
-    notifyOutputChanged: (timeFrom: Date, timeTo: Date) => void;
+    notifyOutputChanged: (timeFrom: Date, timeTo: Date, isTimeWindowValid: boolean) => void;
 }
 
 enum HourFormat {
@@ -80,7 +80,7 @@ const onRenderTitleFrom = (options?: IDropdownOption[]) => {
 
         return (
             <div>
-                <span>{`From: ${option.text}`}</span>
+                <span style={{ fontWeight: 600 }}>{`From: ${option.text}`}</span>
             </div>
         );
     }
@@ -94,7 +94,7 @@ const onRenderTitleTo = (options?: IDropdownOption[]) => {
 
         return (
             <div>
-                <span>{`To: ${option.text}`}</span>
+                <span style={{ fontWeight: 600 }}>{`To: ${option.text}`}</span>
             </div>
         );
     }
@@ -160,16 +160,31 @@ export const DateAndTimeRangePicker = (props: IDateAndTimeRangePicker) => {
                 snappedTimeTo = new Date(`${selectedDate.toDateString()} ${timeTo}`);
             }
 
-            props.notifyOutputChanged(snappedTimeFrom, snappedTimeTo);
+            props.notifyOutputChanged(snappedTimeFrom, snappedTimeTo, true);
         }
     }
 
     const onChangeTimeFrom = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => {
         if (option) {
             setTimeFrom(option.text);
-            const dateFrom = new Date(`${datePickerDate.toDateString()} ${option.text}`);
-            const dateTo = new Date(`${datePickerDate.toDateString()} ${timeTo}`);
-            props.notifyOutputChanged(dateFrom, dateTo);
+            let dateFrom = new Date(`${datePickerDate.toDateString()} ${option.text}`);
+            let dateTo = new Date(`${datePickerDate.toDateString()} ${timeTo}`);
+            if (dateFrom > dateTo) {
+                dateTo = new Date(`${datePickerDate.toDateString()} ${option.text}`);
+                dateTo.setMinutes(dateTo.getMinutes() + 30);
+
+                if (hourFormat === HourFormat.Hour24) {
+                    // setTimeFrom(getTimeString24HourFormat(timeFrom));
+                    setTimeTo(getTimeString24HourFormat(dateTo));
+                }
+
+                if (hourFormat === HourFormat.Hour12) {
+                    // setTimeFrom(getTimeString12HourFormat(timeFrom));
+                    setTimeTo(getTimeString12HourFormat(dateTo));
+                }
+                // setTimeTo(option.text);
+            }
+            props.notifyOutputChanged(dateFrom, dateTo, true);
         }
     }
 
@@ -178,7 +193,8 @@ export const DateAndTimeRangePicker = (props: IDateAndTimeRangePicker) => {
             setTimeTo(option.text);
             const dateFrom = new Date(`${datePickerDate.toDateString()} ${timeFrom}`);
             const dateTo = new Date(`${datePickerDate.toDateString()} ${option.text}`);
-            props.notifyOutputChanged(dateFrom, dateTo);
+            const isTimeWindowValid = dateFrom < dateTo;
+            props.notifyOutputChanged(dateFrom, dateTo, isTimeWindowValid);
         }
     }
 
@@ -201,6 +217,7 @@ export const DateAndTimeRangePicker = (props: IDateAndTimeRangePicker) => {
                         ariaLabel="Date picker"
                         styles={{
                             root: { minWidth: 160, width: '100%', paddingRight: 5, paddingTop: 5 },
+                            textField: { fontWeight: 600 }
                         }}
                     />
                 </Stack.Item>

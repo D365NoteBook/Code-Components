@@ -3,7 +3,7 @@
   <control 
     namespace="DNB" 
     constructor="TimeWindowPicker" 
-    version="0.0.10" 
+    version="0.0.12" 
     display-name-key="Time Window Picker" 
     description-key="Time Window Picker" 
     control-type="virtual" >
@@ -48,6 +48,12 @@
           display-name-key="12-hour"
         >1</value>
     </property>
+    <property 
+      name="isTimeWindowValid" 
+      display-name-key="Is Time Window Valid" 
+      description-key="Output only property." 
+      of-type="TwoOptions" 
+      usage="output" />
     <resources>
       <code path="index.ts" order="1"/>
       <css path="css\ControlStyle.css" order="1"/>

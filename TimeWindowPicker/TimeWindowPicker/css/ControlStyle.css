@@ -1,5 +1,6 @@
  .customDatePicker input[type="text"] {
      border: none;
+     font-weight: 600;
  }
 
  .ms-TextField-fieldGroup {

@@ -7,6 +7,7 @@ export class TimeWindowPicker implements ComponentFramework.ReactControl<IInputs
     private _notifyOutputChanged: () => void;
     private _timeFrom: Date;
     private _timeTo: Date;
+    private _isTimeWindowValid: boolean;
     private _context: ComponentFramework.Context<IInputs>
 
     /**
@@ -73,9 +74,10 @@ export class TimeWindowPicker implements ComponentFramework.ReactControl<IInputs
         return new Date(newDate);
     }
 
-    public notifyOutputChanged(timeFrom: Date, timeTo: Date) {
+    public notifyOutputChanged(timeFrom: Date, timeTo: Date, isTimeWindowValid: boolean) {
         this._timeFrom = timeFrom;
         this._timeTo = timeTo;
+        this._isTimeWindowValid = isTimeWindowValid
         this._notifyOutputChanged();
     }
 
@@ -86,7 +88,8 @@ export class TimeWindowPicker implements ComponentFramework.ReactControl<IInputs
     public getOutputs(): IOutputs {
         return {
             timeFrom: this._timeFrom,
-            timeTo: this._timeTo
+            timeTo: this._timeTo,
+            isTimeWindowValid: this._isTimeWindowValid
         };
     }
 
