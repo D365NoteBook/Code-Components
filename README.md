@@ -35,4 +35,6 @@ Provide following properties values for the control:
 
 ![image](https://github.com/D365NoteBook/Code-Components/assets/166216845/4e301cb3-0cf7-4a6b-8550-1e5680862b2c)
 
+[Visit this link to see the detail steps on how to use this control.](https://d365notebook.blogspot.com/2024/04/time-window-picker-control.html)
+
 
