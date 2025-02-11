@@ -25,4 +25,8 @@ DNB.Case = {
             ctrlArrivalWindow.clearNotification(uniqueId);
         }
     }
+
+    onSave: function Test() {
+
+    };
 }
